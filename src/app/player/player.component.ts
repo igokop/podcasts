@@ -14,7 +14,7 @@ export class PlayerComponent implements OnInit {
   files: Array<any> = [];
   state: StreamState;
   photo: string = 'https://production.listennotes.com/web/image/776f23644387485291977e49dea90b71.png';
-  name: string = 'Go to favorites and choose episode' 
+  name: string = 'Go to favourites and choose episode' 
   author: string;
   trendingWorld = [];
   trendingPoland= [];
