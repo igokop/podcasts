@@ -1,0 +1,9 @@
+<div class="backdrop" (click) = "closeIt()"></div>
+<div [@dialog] class="alert-box">
+    <ng-content></ng-content>
+    <div class="alert-box-actions">
+        <span class="material-icons" (click)="closeIt()" style="cursor:pointer; padding-right: 5px">
+            close
+        </span>
+    </div>
+</div>

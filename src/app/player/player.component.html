@@ -1,0 +1,101 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+            <div style="text-align: center;">
+                <div style="height:20px; border-radius:20px">
+                </div>
+                <div style="height:160px; border-radius:20px">
+                    <img style="height:140px; border-radius: 20px;" src="{{ photo }}">
+                </div>
+                <div style="text-align: center; max-width: 350px; margin-left: auto; margin-right: auto;">
+                    <div style="height: 20px;"></div>
+                    <mat-slider style="cursor:pointer; width:100%" class="time-slider" min="0" [max]="state?.duration" step="1" [value]="state?.currentTime" (input)="onSliderChangeEnd($event)" [disabled]="state?.error || currentFile.index === undefined"></mat-slider>
+                    <div style="height: 60px;">
+                        <h5>{{ name }}</h5>
+                        <h6>{{ author }}</h6>
+                    </div>
+                    <span style=" cursor:pointer; font-size:60px" class="material-icons" (click)="previous()">
+                        skip_previous
+                    </span>
+                    <span (click)="play()" [disabled]="state?.error" *ngIf="!state?.playing" style="cursor:pointer; font-size:70px" class="material-icons">
+                        play_circle_outline
+                    </span>
+                    <span (click)="pause()" *ngIf="state?.playing" style="cursor:pointer; font-size:70px" class="material-icons">
+                        pause_circle_outline
+                    </span>
+                    <span style="cursor:pointer; font-size:60px" class="material-icons" (click)="next()">
+                        skip_next
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4" style="z-index: 0;">
+            <hr>
+            <app-queue></app-queue>
+        </div>
+
+        <div class="col-sm-4 hidden-xs">
+            <!-- <app-alert-info *ngIf="alertOpen" (close)=closeAlert();>
+                <ul class="list-group" *ngFor="let result of currentPodcast; let i=index;">
+                    <a class="list-group-item clearfix">
+                        <img style="border-radius:10px; float: left; height: 50px; width: 50px;"src="{{ result.image }}" >
+                        <h5 style="max-width:80%; float: right">{{ result.title_original }}</h5>
+                        <div style="float: right;height:1px; width:100%"></div>
+                        <h6 style="max-width:80%; float: right;">{{ result.podcast.title_original }} </h6>
+                        <span style="position: relative; bottom:0%; float: left; font-size:20px; cursor: pointer;" (click)="addFile(i)" class="material-icons"> favorite </span>
+                    </a>
+                    </ul>
+            </app-alert-info> -->
+            <hr>
+            <h3 style="height: 40px;">Trending worldwide</h3>
+            <ul class="list-group" *ngFor="let trendy of trendingWorld; let i=index;">
+                <a class="list-group-item clearfix">
+                    <img style="border-radius:10px; float: left; height: 50px; width: 50px;"src="{{ trendy.image }}" >
+                    <h5 style="max-width:80%; float: right">{{ trendy.title }}</h5>
+                    <div style="float: right;height:1px; width:100%"></div>
+                    <h6 style="max-width:80%; float: right;">{{ trendy.publisher}} </h6>
+                    <!-- <span style="position: relative; bottom:0%; float: left; font-size:20px; cursor: pointer;" (click)="addFile(i)" class="material-icons"> favorite </span> -->
+                </a>
+            </ul>
+        </div>
+        <div class="col-sm-4 hidden-xs">
+            <hr>
+            <h3 style="height:40px">Trending Poland</h3>
+            <ul class="list-group" *ngFor="let trendy of trendingPoland; let i=index;">
+                <a class="list-group-item clearfix">
+                    <img style="border-radius:10px; float: left; height: 50px; width: 50px;"src="{{ trendy.image }}" >
+                    <h5 style="max-width:80%; float: right">{{ trendy.title }}</h5>
+                    <div style="float: right;height:1px; width:100%"></div>
+                    <h6 style="max-width:80%; float: right;">{{ trendy.publisher }} </h6>
+                    <!-- <span style="position: relative; bottom:0%; float: left; font-size:20px; cursor: pointer;" (click)="addFile(i)" class="material-icons"> favorite </span> -->
+                </a>
+            </ul>
+        </div>
+    </div>
+</div>
+<div style="height: 50px;"></div>
+
+<mat-toolbar class="hidden-xs" color="primary" style="position: fixed; bottom:0;">
+    <mat-toolbar-row style="justify-content: center; height: 45px;">
+        <span style="cursor:pointer; font-size:40px" class="material-icons" (click)="previous()">
+            skip_previous
+        </span>
+        <span (click)="play()" [disabled]="state?.error" *ngIf="!state?.playing" style="cursor:pointer; font-size:40px" class="material-icons">
+            play_circle_outline
+        </span>
+        <span (click)="pause()" *ngIf="state?.playing" style="cursor:pointer; font-size:40px" class="material-icons">
+            pause_circle_outline
+        </span>
+        <span style="cursor:pointer; cursor:pointer; font-size:40px" class="material-icons" (click)="next()">
+            skip_next
+        </span>
+    </mat-toolbar-row>
+    <mat-toolbar-row style="height:10px; justify-content: center;">
+        <mat-slider style="float: right; display: inline; width:30%;" class="time-slider" min="0" [max]="state?.duration" step="1" [value]="state?.currentTime" (input)="onSliderChangeEnd($event)" [disabled]="state?.error || currentFile.index === undefined"></mat-slider>
+    </mat-toolbar-row>
+    <mat-toolbar-row style="height:10px; justify-content: left;">
+        <img style="position:absolute; bottom:5px; float:left; display: inline; height:55px; border-radius: 20px;" src="{{ photo }}">
+        <span style="font-size: 11px; left:90px; position:absolute; bottom:19px; overflow-wrap:break-word; max-width: 80px; ">{{ name }}  {{ author }}</span>
+        <span style="font-size: 9px; left:90px; position:absolute; bottom:8px; overflow-wrap:break-word; max-width: 80px; ">{{ author }}</span>
+    </mat-toolbar-row>
+</mat-toolbar>

@@ -1,0 +1,67 @@
+<mat-tab-group mat-align-tabs="start">
+  <mat-tab label="Common library">
+    <form [formGroup]="search" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input type="text" formControlName="searchPodcasts" class="form-control" placeholder="Search for podcasts" />
+        <span (click)="onSubmit()" style="cursor:pointer; right:5px;" class="material-icons"> search </span>
+      </div>
+    </form>
+
+    <ul class="list-group" *ngFor="let result of searchResult; let i=index;">
+    <a class="list-group-item clearfix">
+        <img style="border-radius:10px; float: left; height: 50px; width: 50px;"src="{{ result.image }}" >
+        <h5 style="max-width:80%; float: right">{{ result.title_original }}</h5>
+        <div style="float: right;height:1px; width:100%"></div>
+        <h6 style="max-width:80%; float: right;">{{ result.podcast.title_original }} </h6>
+        <span style="position: relative; bottom:0%; float: left; font-size:20px; cursor: pointer;" (click)="addFile(i)" class="material-icons"> favorite </span>
+    </a>
+    </ul>
+  </mat-tab>
+
+  <mat-tab label="Favorites">
+    <ul class="list-group" *ngFor="let episode of episodes; let i = index" (click)="openFile(episode, i)">
+    <a class="list-group-item clearfix">
+      <img style="border-radius:10px; float: left; height: 50px; width: 50px;"src="{{ episode.image }}" >
+      <span style="cursor:pointer; float:right; font-size:30px" class="material-icons" (click)="deleteIt(i)"> delete </span> 
+      <span *ngIf="i===currentFile.index && playing" style="float: right; font-size:30px" class="material-icons"> play_arrow </span><span *ngIf="i===currentFile.index && !playing" style="float:right; font-size:30px" class="material-icons"> pause </span> 
+      <div style="float: right;height:1px; width:100%"></div>
+      <h5 style="max-width:80%; float: right">{{ episode.title_original }}</h5>
+      <div style="float: right;height:1px; width:100%"></div>
+      <h6 style="max-width:80%; float: right;">{{ episode.podcast.title_original }}</h6>
+      
+      
+    </a>
+    </ul>
+  </mat-tab>
+
+  <mat-tab label="Searching language">
+    <mat-radio-group
+    style="display: flex;
+    flex-direction: column;
+    margin: 15px 0;"
+    aria-labelledby="example-radio-group-label"
+    class="example-radio-group"
+    [(ngModel)]="selectedLanguage">
+      <mat-radio-button color="primary" class="example-radio-button" *ngFor="let language of languages" [value]="language">
+      {{language}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-tab>
+    
+  <!-- <mat-tab label="Select user">
+    <mat-radio-group
+    style="display: flex;
+    flex-direction: column;
+    margin: 15px 0;"
+    aria-labelledby="example-radio-group-label"
+    class="example-radio-group"
+    [(ngModel)]="selectedUser">
+      <mat-radio-button color="primary" class="example-radio-button" *ngFor="let user of users">
+      {{user}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-tab> -->
+</mat-tab-group>
+
+
+
