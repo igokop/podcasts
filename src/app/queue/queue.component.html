@@ -18,7 +18,7 @@
     </ul>
   </mat-tab>
 
-  <mat-tab label="Favorites">
+  <mat-tab label="Favourites">
     <ul class="list-group" *ngFor="let episode of episodes; let i = index" (click)="openFile(episode, i)">
     <a class="list-group-item clearfix">
       <img style="border-radius:10px; float: left; height: 50px; width: 50px;"src="{{ episode.image }}" >
