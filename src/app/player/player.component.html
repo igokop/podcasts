@@ -94,8 +94,8 @@
         <mat-slider style="float: right; display: inline; width:30%;" class="time-slider" min="0" [max]="state?.duration" step="1" [value]="state?.currentTime" (input)="onSliderChangeEnd($event)" [disabled]="state?.error || currentFile.index === undefined"></mat-slider>
     </mat-toolbar-row>
     <mat-toolbar-row style="height:10px; justify-content: left;">
-        <img style="position:absolute; bottom:5px; float:left; display: inline; height:55px; border-radius: 20px;" src="{{ photo }}">
-        <span style="font-size: 11px; left:90px; position:absolute; bottom:19px; overflow-wrap:break-word; max-width: 80px; ">{{ name }}  {{ author }}</span>
-        <span style="font-size: 9px; left:90px; position:absolute; bottom:8px; overflow-wrap:break-word; max-width: 80px; ">{{ author }}</span>
+        <img style="position:absolute; bottom: 7px; float:left; display: inline; height:55px; border-radius: 20px;" src="{{ photo }}">
+        <span style="white-space: pre-line; line-height: 11px; font-size: 11px; left:90px; position:absolute; bottom:26px; overflow-wrap:break-word; max-width: 200px; ">{{ name }}  {{ author }}</span>
+        <span style="white-space: pre-line; line-height: 9px; font-size: 9px; left:90px; position:absolute; bottom:5px; overflow-wrap:break-word; max-width: 200px; ">{{ author }}</span>
     </mat-toolbar-row>
 </mat-toolbar>
