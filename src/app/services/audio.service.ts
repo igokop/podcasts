@@ -77,6 +77,14 @@ export class AudioService {
     this.audioObj.currentTime = seconds;
   }
 
+  seekPlus(){
+    this.audioObj.currentTime = this.audioObj.currentTime +30;
+  }
+
+  seekMinus(){
+    this.audioObj.currentTime = this.audioObj.currentTime -10;
+  }
+
   formatTime(time: number, format: string = 'HH:mm:ss') {
     const momentTime = time * 1000;
     return moment.utc(momentTime).format(format);

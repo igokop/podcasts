@@ -15,7 +15,7 @@
                         <h6>{{ author }}</h6>
                     </div>
                     <span style=" cursor:pointer; font-size:60px" class="material-icons" (click)="previous()">
-                        skip_previous
+                        replay_10
                     </span>
                     <span (click)="play()" [disabled]="state?.error" *ngIf="!state?.playing" style="cursor:pointer; font-size:70px" class="material-icons">
                         play_circle_outline
@@ -24,7 +24,7 @@
                         pause_circle_outline
                     </span>
                     <span style="cursor:pointer; font-size:60px" class="material-icons" (click)="next()">
-                        skip_next
+                        forward_30
                     </span>
                 </div>
             </div>
@@ -78,7 +78,7 @@
 <mat-toolbar class="hidden-xs" color="primary" style="position: fixed; bottom:0;">
     <mat-toolbar-row style="justify-content: center; height: 45px;">
         <span style="cursor:pointer; font-size:40px" class="material-icons" (click)="previous()">
-            skip_previous
+            replay_10
         </span>
         <span (click)="play()" [disabled]="state?.error" *ngIf="!state?.playing" style="cursor:pointer; font-size:40px" class="material-icons">
             play_circle_outline
@@ -87,10 +87,10 @@
             pause_circle_outline
         </span>
         <span style="cursor:pointer; cursor:pointer; font-size:40px" class="material-icons" (click)="next()">
-            skip_next
+            forward_30
         </span>
     </mat-toolbar-row>
-    <mat-toolbar-row style="height:10px; justify-content: center;">
+    <mat-toolbar-row style="height:18px; justify-content: center;">
         <mat-slider style="float: right; display: inline; width:30%;" class="time-slider" min="0" [max]="state?.duration" step="1" [value]="state?.currentTime" (input)="onSliderChangeEnd($event)" [disabled]="state?.error || currentFile.index === undefined"></mat-slider>
     </mat-toolbar-row>
     <mat-toolbar-row style="height:10px; justify-content: left;">

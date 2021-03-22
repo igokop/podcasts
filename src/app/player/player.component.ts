@@ -58,15 +58,17 @@ export class PlayerComponent implements OnInit {
   }
 
   next() {
-    const index = this.currentFile.index + 1;
-    const file = this.files[index];
-    this.openFile(file, index);
+    // const index = this.currentFile.index + 1;
+    // const file = this.files[index];
+    // this.openFile(file, index);
+    this.audioService.seekPlus();
   }
 
   previous() {
-    const index = this.currentFile.index - 1;
-    const file = this.files[index];
-    this.openFile(file, index);
+    // const index = this.currentFile.index - 1;
+    // const file = this.files[index];
+    // this.openFile(file, index);
+    this.audioService.seekMinus();
   }
 
   isFirstPlaying() {

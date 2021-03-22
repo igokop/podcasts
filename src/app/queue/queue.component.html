@@ -4,23 +4,25 @@
       <div class="form-group">
         <input type="text" formControlName="searchPodcasts" class="form-control" placeholder="Search for podcasts" />
         <span (click)="onSubmit()" style="cursor:pointer; right:5px;" class="material-icons"> search </span>
+        <p class="help-block" *ngIf="searchResult.length===0"> Default searching language is english. You can change it in searching lanugage tab  </p>
       </div>
     </form>
 
-    <ul class="list-group" *ngFor="let result of searchResult; let i=index;">
-    <a class="list-group-item clearfix">
+    <ul class="list-group" *ngFor="let result of searchResult; let i=index;" (click)="openFile(result, i)">
+    <a class="list-group-item clearfix" style="cursor:pointer">
         <img style="border-radius:10px; float: left; height: 50px; width: 50px;"src="{{ result.image }}" >
+        <span style="position: relative; bottom:0%; float: right; font-size:30px; cursor: pointer;" (click)="addFile(i)" class="material-icons"> favorite </span>
+        <div style="float: right;height:1px; width:100%"></div>
         <h5 style="max-width:80%; float: right">{{ result.title_original }}</h5>
         <div style="float: right;height:1px; width:100%"></div>
         <h6 style="max-width:80%; float: right;">{{ result.podcast.title_original }} </h6>
-        <span style="position: relative; bottom:0%; float: left; font-size:20px; cursor: pointer;" (click)="addFile(i)" class="material-icons"> favorite </span>
     </a>
     </ul>
   </mat-tab>
 
   <mat-tab label="Favourites">
     <ul class="list-group" *ngFor="let episode of episodes; let i = index" (click)="openFile(episode, i)">
-    <a class="list-group-item clearfix">
+    <a class="list-group-item clearfix" style="cursor:pointer">
       <img style="border-radius:10px; float: left; height: 50px; width: 50px;"src="{{ episode.image }}" >
       <span style="cursor:pointer; float:right; font-size:30px" class="material-icons" (click)="deleteIt(i)"> delete </span> 
       <span *ngIf="i===currentFile.index && playing" style="float: right; font-size:30px" class="material-icons"> play_arrow </span><span *ngIf="i===currentFile.index && !playing" style="float:right; font-size:30px" class="material-icons"> pause </span> 
