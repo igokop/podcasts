@@ -1,30 +1,45 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PodcastApiService } from '../services/podcast-api.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-
-import { PlayerComponent } from './player.component';
+import { HttpClient } from "@angular/common/http";
+import { inject } from "@angular/core/testing";
+import { of } from "rxjs";
+import { AudioService } from "../services/audio.service";
+import { CloudService } from "../services/cloud.service";
+import { PodcastApiService } from "../services/podcast-api.service";
+import { PlayerComponent } from "./player.component";
 
 describe('PlayerComponent', () => {
+  let component: PlayerComponent; 
+  let podcastApiService: PodcastApiService;
+  let cloudService: CloudService;
+  let audioService: AudioService;
+
   beforeEach(()=>{
-    TestBed.configureTestingModule({
-      declarations: [PlayerComponent],
-      providers: [PodcastApiService],
-      imports: [HttpClientTestingModule]
-    });
-  })
+    component = new PlayerComponent(audioService, cloudService, podcastApiService);
+    podcastApiService = new PodcastApiService(null);
+  });
 
-  it ('should create the component', () =>{
-    let fixture = TestBed.createComponent(PlayerComponent);
-    let app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  })
+  // it('should get trending Poland data', inject([HttpClient], (httpClient: HttpClient) =>{
+  //   podcastApiService.poland.subscribe(res => respond = res);
 
-  it('take value from event emitter', () =>{
-    let fixture = TestBed.createComponent(PlayerComponent);
-    let app = fixture.debugElement.componentInstance; 
-    let podcastApiService = fixture.debugElement.injector.get(PodcastApiService);
-    // let spy = spyOn(podcastApiService, 'getDataPoland');
-    fixture.detectChanges();
-    podcastApiService.poland.subscribe(value => expect(app.trendingPoland).toBe(value));
-  })
+  //   let data: {podcast:'Paciorek', language: 'pl'};
+  //   let respond;
+  //   console.log(data);
+
+  //   spyOn(podcastApiService, 'getDataPoland').and.returnValue();
+  //   spyOn(httpClient.get).and.returnValue(of([]));
+
+  //   component.getDataPoland();
+
+  //   expect(respond).toBe(data.podcast);
+  // });
+
+
+  // it('getting info that first song is playing', ()=> {
+
+  // });
+
+  
+
+
+
+
 });

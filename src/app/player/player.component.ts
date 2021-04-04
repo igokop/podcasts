@@ -19,17 +19,7 @@ export class PlayerComponent implements OnInit {
   trendingWorld = [];
   trendingPoland= [];
   currentFile: any = {};
-  constructor(public audioService: AudioService, public cloudService: CloudService, private podcastApiService: PodcastApiService) {
-    this.audioService.getState().subscribe(state => {
-      this.state = state;
-    });
-    this.cloudService.getFiles().subscribe(files => {this.files = files;});
-    this.cloudService.currentUpdate.subscribe(current => {
-      this.currentFile = current;
-      this.photo = current.file.image; 
-      this.name= current.file.title_original; 
-      this.author = current.file.podcast.title_original});
-  }
+  constructor(public audioService: AudioService, public cloudService: CloudService, private podcastApiService: PodcastApiService) {}
 
   playStream(url) {
     this.audioService.playStream(url).subscribe();
@@ -85,8 +75,21 @@ export class PlayerComponent implements OnInit {
   ngOnInit(): void {
     this.podcastApiService.getDataWorld();
     this.podcastApiService.world.subscribe(data => {this.trendingWorld=data;})
-    this.podcastApiService.getDataPoland();
+    this.getDataPoland();
     this.podcastApiService.poland.subscribe(data => {this.trendingPoland=data;})
     this.cloudService.getFavorites();
+    this.audioService.getState().subscribe(state => {
+      this.state = state;
+    });
+    this.cloudService.getFiles().subscribe(files => {this.files = files;});
+    this.cloudService.currentUpdate.subscribe(current => {
+      this.currentFile = current;
+      this.photo = current.file.image; 
+      this.name= current.file.title_original; 
+      this.author = current.file.podcast.title_original});
+  }
+
+  getDataPoland(){
+    this.podcastApiService.getDataPoland();
   }
 }

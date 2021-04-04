@@ -23,7 +23,7 @@ export class AudioService {
     error: false,
   };
 
-  private streamObservable(url) {
+  streamObservable(url) {
     return new Observable(observer => {
       // Play audio
       this.audioObj.src = url;

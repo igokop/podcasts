@@ -1,3 +1,4 @@
+import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs';
@@ -12,13 +13,7 @@ import { PodcastApiService } from '../services/podcast-api.service';
   styleUrls: ['./queue.component.css']
 })
 export class QueueComponent implements OnInit {
-  constructor(private audioService: AudioService, private cloudService: CloudService, private podcastApiService: PodcastApiService){
-    cloudService.getFiles().subscribe(files => {
-      this.episodes = files;
-    });
-    cloudService.currentUpdate.subscribe(current => this.currentFile = current);
-    cloudService.filesUpdate.subscribe(episodes => this.episodes = episodes)
-  }
+  constructor(private audioService: AudioService, private cloudService: CloudService, private podcastApiService: PodcastApiService){}
   selectedUser: string;
   selectedLanguage: string = 'English';
   languages: string[] = ['English', 'Polish', 'German', 'Italian'];
@@ -45,7 +40,11 @@ export class QueueComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.cloudService.getFiles().subscribe(files => {
+      this.episodes = files;
+    });
+    this.cloudService.currentUpdate.subscribe(current => this.currentFile = current);
+    this.cloudService.filesUpdate.subscribe(episodes => this.episodes = episodes)
     this.search = new FormGroup({
       'searchPodcasts': new FormControl});
     this.audioService.stateChange.subscribe(info => this.playing = info.playing);
@@ -59,6 +58,8 @@ export class QueueComponent implements OnInit {
   }
 
   onSubmit(){
+    console.log(this.selectedLanguage);
+    console.log(this.search.value.searchPodcasts);
     this.podcastApiService.getData(this.search.value.searchPodcasts, this.selectedLanguage);
     this.search.reset();
     
@@ -66,12 +67,12 @@ export class QueueComponent implements OnInit {
 
   addFile(i){
     this.cloudService.addFile(this.searchResult[i]);
-    if(this.episodes[0]){
-      const index = 0;
-      const file = this.episodes[0];
-      const defaultValue = {file, index}
-      this.cloudService.currentFileSet(defaultValue);
-    }
+    // if(this.episodes[0]){
+    //   const index = 0;
+    //   const file = this.episodes[0];
+    //   const defaultValue = {file, index}
+    //   this.cloudService.currentFileSet(defaultValue);
+    // }
   }
 
   deleteIt(i){

@@ -24,7 +24,6 @@ export class CloudService {
     this.files.push(file);
     this.storeFavorites(this.files);
     this.filesUpdate.emit(this.files);
-  
   }
 
   getFavorites(){
